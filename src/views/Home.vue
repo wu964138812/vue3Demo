@@ -83,6 +83,7 @@ import navBar from '@/components/NavBar'
 import { getHome } from '@/service/home'
 import { getLocal } from '@/common/js/utils'
 import { Toast } from 'vant'
+import { useStore } from 'vuex'
 export default {
   name: 'home',
   components: {
@@ -145,6 +146,8 @@ export default {
     })
     onMounted(async () => {
       const token = getLocal('token')
+      const store = useStore()
+      store.commit("demoStore/setAreaSelection", []);
       if (token) {
         state.isLogin = true
       }
