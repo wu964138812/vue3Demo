@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 <!--
  * 严肃声明：
  * 开源版本请务必保留此注释头信息，若删除我方将保留所有法律责任追究！
@@ -76,7 +77,7 @@
 </template>
 
 <script>
-import { reactive, onMounted, toRefs, nextTick } from 'vue'
+import { reactive, onMounted, toRefs, nextTick, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 import swiper from '@/components/Swiper'
 import navBar from '@/components/NavBar'
@@ -178,7 +179,20 @@ export default {
     const tips = () => {
       Toast('敬请期待');
     }
-
+  const stateTwo = reactive({
+      name: 'test',
+      age: 20
+   });
+        watchEffect(() => {
+            console.log('state.age', stateTwo.age)
+            console.log('state.name', stateTwo.name)
+        })
+        setTimeout(() => {
+            stateTwo.age = 25
+        }, 1500)
+        setTimeout(() => {
+            stateTwo.name = 'test1'
+        }, 3000)
     return {
       ...toRefs(state),
       goToDetail,
